@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Build OpenCV 3.4.5 From Source for Anaconda on Ubuntu 16.04 With Cuda | KCCarlos&#39;s Notes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="og:type" content="article">
+<meta property="og:title" content="Build OpenCV 3.4.5 From Source for Anaconda on Ubuntu 16.04 With Cuda">
+<meta property="og:url" content="https://kccarlos.github.io/2019/03/18/Build-OpenCV-3.4.5-from-source-for-Anaconda-on-Ubuntu-16.04-with-CUDA/index.html">
+<meta property="og:site_name" content="KCCarlos&#39;s Notes">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://kccarlos.github.io/uploads/OpenCV_Logo.png">
+<meta property="article:published_time" content="2019-03-19T00:13:40.000Z">
+<meta property="article:modified_time" content="2022-11-06T21:01:25.067Z">
+<meta property="article:author" content="kccarlos">
+<meta property="article:tag" content="OpenCV">
+<meta property="article:tag" content="Ubuntu">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://kccarlos.github.io/uploads/OpenCV_Logo.png">
+  
+    <link rel="alternate" href="/atom.xml" title="KCCarlos's Notes" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">KCCarlos&#39;s Notes</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://kccarlos.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-Build-OpenCV-3.4.5-from-source-for-Anaconda-on-Ubuntu-16.04-with-CUDA" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2019/03/18/Build-OpenCV-3.4.5-from-source-for-Anaconda-on-Ubuntu-16.04-with-CUDA/" class="article-date">
+  <time class="dt-published" datetime="2019-03-19T00:13:40.000Z" itemprop="datePublished">2019-03-18</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Computer-Vision/">Computer-Vision</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      Build OpenCV 3.4.5 From Source for Anaconda on Ubuntu 16.04 With Cuda
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><img src="/uploads/OpenCV_Logo.png" alt="OpenCV Logo"></p>
+<span id="more"></span>
+<p>Sometimes you may need some special packages in openCV that are not included in the pre-built version. You may also need this opencv to be linked to the anaconda&#x2F;miniconda virtual environment that you already created. This one is tricky as the configuration is pretty complex, especially for people like me not used to C++. I have read a lot of online blogs and could not find out one that works perfectly for my situation. Therefore, I logged down my experience, hoping to save you from investing time preparing the environment. </p>
+<h2 id="Install-Cuda-and-test-installation"><a href="#Install-Cuda-and-test-installation" class="headerlink" title="Install Cuda and test installation"></a>Install Cuda and test installation</h2><p>Please refer to Nvidia’s detailed Cuda <a target="_blank" rel="noopener" href="https://docs.nvidia.com/Cuda/Cuda-installation-guide-linux/index.html">installation guide</a>. Please notice that this link refers to Cuda 10 and you should choose the version applicable. Sometimes OpenCV is not yet compatible to the latest Cuda. Therefore, I recommend installing a previous version Cuda, like 9.0. In this post, I chose Cuda 9.0 to comply with Tensorflow 1.12 and OpenCV 3.4.5 I am going to install later.</p>
+<h2 id="Install-dependencies"><a href="#Install-dependencies" class="headerlink" title="Install dependencies"></a>Install dependencies</h2><p><strong>Reference:</strong> <a target="_blank" rel="noopener" href="https://www.pytorials.com/how-to-install-opencv340-on-ubuntu1604/">https://www.pytorials.com/how-to-install-opencv340-on-ubuntu1604/</a></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install build-essential</span><br><span class="line">sudo apt-get install cmake git libgtk2.0-dev pkg-config libavcodec-dev libavformat-dev libswscale-dev</span><br><span class="line">sudo apt-get install python-dev python-numpy libtbb2 libtbb-dev libjpeg-dev libpng-dev libtiff-dev libjasper-dev libdc1394-22-dev</span><br><span class="line">sudo apt-get install libavcodec-dev libavformat-dev libswscale-dev libv4l-dev</span><br><span class="line">sudo apt-get install libxvidcore-dev libx264-dev</span><br><span class="line">sudo apt-get install libgtk-3-dev</span><br><span class="line">sudo apt-get install libatlas-base-dev gfortran pylint</span><br><span class="line">sudo apt-get install python2.7-dev python3.5-dev</span><br></pre></td></tr></table></figure>
+<p><strong>Notice</strong>:</p>
+<ul>
+<li>You need to install python3-numpy in order to let OpenCV build for Python 3, which is missed in the article I referenced.</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install python3-numpy</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<ul>
+<li>Besides, you may install ccmake for a friendly UI in later compilation</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install cmake-curses-gui</span><br></pre></td></tr></table></figure>
+<ul>
+<li>if GCC, G++ is missed in your computer, you may install them as well</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install gcc g++</span><br></pre></td></tr></table></figure>
+
+<h2 id="Download-OpenCV-3-4-5"><a href="#Download-OpenCV-3-4-5" class="headerlink" title="Download OpenCV 3.4.5"></a>Download OpenCV 3.4.5</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wget https://github.com/opencv/opencv/archive/3.4.5.zip -O opencv-3.4.5.zip</span><br><span class="line">wget https://github.com/opencv/opencv_contrib/archive/3.4.5.zip -O opencv_contrib-3.4.5.zip</span><br><span class="line">unzip opencv-3.4.5.zip</span><br><span class="line">unzip opencv_contrib-3.4.5.zip</span><br></pre></td></tr></table></figure>
+
+<h2 id="Configure-OpenCV-installation"><a href="#Configure-OpenCV-installation" class="headerlink" title="Configure OpenCV installation"></a>Configure OpenCV installation</h2><p>__Notice: __</p>
+<ul>
+<li>OPENCV_EXTRA_MODULES_PATH should be changed to adapt to your computer.</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> opencv-3.4.5</span><br><span class="line"><span class="built_in">mkdir</span> build</span><br><span class="line"><span class="built_in">cd</span> build</span><br><span class="line">cmake -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=/usr/local -DOPENCV_EXTRA_MODULES_PATH=/home/cvpl/cvproj/opencv_contrib-3.4.5/modules -DPYTHON_DEFAULT_EXECUTABLE=/usr/bin/python3.5 ..</span><br></pre></td></tr></table></figure>
+<ul>
+<li>You may execute ccmake .. for a GUI configuration experience<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ccmake ..</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h2 id="Compile-and-install"><a href="#Compile-and-install" class="headerlink" title="Compile and install"></a>Compile and install</h2><p>First, check how many cores you have in your computer. If there are 8, run -j8.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cat</span> /proc/cpuinfo | grep processor | <span class="built_in">wc</span> -l</span><br><span class="line">make -j8</span><br></pre></td></tr></table></figure>
+
+<p>If you face the following issue, probably it is due to the incompatibility of Cuda and OpenCV. Cuda 10 was released after OpenCV 3.4.5, so try to install Cuda 9.0 to your computer instead.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Makefile:160: recipe for target &#x27;all&#x27; failed</span><br><span class="line">Issue page: https://github.com/opencv/opencv/issues/7652</span><br></pre></td></tr></table></figure>
+<p>After long waiting and no errors occur, start installation.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo make install</span><br></pre></td></tr></table></figure>
+
+<h2 id="Install-anaconda-x2F-miniconda-and-create-a-virtual-environment"><a href="#Install-anaconda-x2F-miniconda-and-create-a-virtual-environment" class="headerlink" title="Install anaconda&#x2F;miniconda and create a virtual environment"></a>Install anaconda&#x2F;miniconda and create a virtual environment</h2><ul>
+<li><p>Here I used miniconda as an example. Download and install miniconda</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh</span><br><span class="line">sh https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Then, we need to edit the system variable in order to use conda command. Without doing this, you need to specify bin path each time you open a new command to use conda.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">gedit ~/.bashrc</span><br><span class="line">	<span class="comment"># Add at the last line</span></span><br><span class="line"><span class="built_in">export</span> PATH=/home/cvpl/miniconda3/bin:<span class="variable">$PATH</span></span><br></pre></td></tr></table></figure></li>
+<li><p>Create a virtual environment and install numpy</p>
+</li>
+</ul>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">conda create --name cvpy3 python=3.5</span><br><span class="line"><span class="built_in">source</span> acitvate cvpy3</span><br><span class="line">conda install numpy</span><br></pre></td></tr></table></figure>
+
+<h2 id="Link-openCV-binding-to-miniconda-virtual-environment"><a href="#Link-openCV-binding-to-miniconda-virtual-environment" class="headerlink" title="Link openCV binding to miniconda virtual environment"></a>Link openCV binding to miniconda virtual environment</h2><p>Right now you are one last step before using “import cv2”. Just find a .so file and copy it to your virtual environment library. You may spend some time looking for it. Normally it is under usr&#x2F;local&#x2F;lib&#x2F;pythonXX&#x2F;site-packages&#x2F;cv2&#x2F;python-3.x. Rename it as cv2.co and copy it to the target directory.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /usr/local/lib/python2.7/dist-packages/cv2/python-2.7</span><br><span class="line">sudo <span class="built_in">cp</span> cv2.so /home/cvpl/miniconda3/envs/cvpy2/lib/python2.7/site-packages/cv2.so</span><br></pre></td></tr></table></figure>
+<p>You may create a python 2 environment and do so for python 2.</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">conda create --name cvpy2 python=2.7</span><br><span class="line"><span class="built_in">source</span> acitvate cvpy2</span><br><span class="line"><span class="built_in">cd</span> /usr/local/lib/python2.7/site-packages/cv2/python-2.7</span><br><span class="line">sudo <span class="built_in">cp</span> cv2.cpython-35m-x86_64-linux-gnu.so cv2.so</span><br><span class="line">sudo <span class="built_in">mv</span> cv2.so /home/cvpl/miniconda3/envs/cvpy3/lib/python3.5/site-packages/cv2.so</span><br></pre></td></tr></table></figure>
+
+<h2 id="Test-the-installation"><a href="#Test-the-installation" class="headerlink" title="Test the installation"></a>Test the installation</h2><p>Try starting a python session and import cv2. If no error occurs, then congratulations ;)</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">python</span><br><span class="line">import cv2</span><br></pre></td></tr></table></figure>
+
+<h2 id="References"><a href="#References" class="headerlink" title="References:"></a>References:</h2><p>Here are the posts I checked out to walk through this process.</p>
+<ol>
+<li><a target="_blank" rel="noopener" href="https://www.pytorials.com/how-to-install-opencv340-on-ubuntu1604/">https://www.pytorials.com/how-to-install-opencv340-on-ubuntu1604/</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/opencv/opencv/issues/8425">https://github.com/opencv/opencv/issues/8425</a></li>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/37070304/how-to-build-opencv-for-python3-when-both-python2-and-python3-are-installed">https://stackoverflow.com/questions/37070304/how-to-build-opencv-for-python3-when-both-python2-and-python3-are-installed</a></li>
+<li><a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/42745993/compiling-opencv-how-to-build-the-cv2-so-module-for-python3-6">https://stackoverflow.com/questions/42745993/compiling-opencv-how-to-build-the-cv2-so-module-for-python3-6</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.tutorialspoint.com/unix_commands/make.htm">https://www.tutorialspoint.com/unix_commands/make.htm</a></li>
+<li><a target="_blank" rel="noopener" href="http://answers.opencv.org/question/173105/successfully-built-opencv-330-but-no-cv2so-found/">http://answers.opencv.org/question/173105/successfully-built-opencv-330-but-no-cv2so-found/</a></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://kccarlos.github.io/2019/03/18/Build-OpenCV-3.4.5-from-source-for-Anaconda-on-Ubuntu-16.04-with-CUDA/" data-id="cla5ucltb0000akz15dih8pjg" data-title="Build OpenCV 3.4.5 From Source for Anaconda on Ubuntu 16.04 With Cuda" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenCV/" rel="tag">OpenCV</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/06/03/How-to-install-and-configure-Samba-on-Ubuntu-14-04/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          How to Install and Configure Samba on Ubuntu 14.04
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2018/11/11/How-to-Setup-phpmyadmin-on-MacOS/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">How to Setup Phpmyadmin on MacOS</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Computer-Vision/">Computer-Vision</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Database/">Database</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/web-security/">web-security</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hacking/" rel="tag">Hacking</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MacOS/" rel="tag">MacOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenCV/" rel="tag">OpenCV</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Samba/" rel="tag">Samba</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XSS/" rel="tag">XSS</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Hacking/" style="font-size: 10px;">Hacking</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/OpenCV/" style="font-size: 10px;">OpenCV</a> <a href="/tags/Samba/" style="font-size: 10px;">Samba</a> <a href="/tags/Ubuntu/" style="font-size: 20px;">Ubuntu</a> <a href="/tags/XSS/" style="font-size: 10px;">XSS</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">October 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/10/15/Cracking-and-Patching-the-Google-XSS-Game/">Cracking and Patching the Google XSS Game</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/03/How-to-install-and-configure-Samba-on-Ubuntu-14-04/">How to Install and Configure Samba on Ubuntu 14.04</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/18/Build-OpenCV-3.4.5-from-source-for-Anaconda-on-Ubuntu-16.04-with-CUDA/">Build OpenCV 3.4.5 From Source for Anaconda on Ubuntu 16.04 With Cuda</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/11/How-to-Setup-phpmyadmin-on-MacOS/">How to Setup Phpmyadmin on MacOS</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 kccarlos<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

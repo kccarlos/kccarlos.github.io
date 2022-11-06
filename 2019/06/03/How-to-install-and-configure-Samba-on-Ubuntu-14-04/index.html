@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>How to Install and Configure Samba on Ubuntu 14.04 | KCCarlos&#39;s Notes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="og:type" content="article">
+<meta property="og:title" content="How to Install and Configure Samba on Ubuntu 14.04">
+<meta property="og:url" content="https://kccarlos.github.io/2019/06/03/How-to-install-and-configure-Samba-on-Ubuntu-14-04/index.html">
+<meta property="og:site_name" content="KCCarlos&#39;s Notes">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://kccarlos.github.io/uploads/samba_logo.png">
+<meta property="article:published_time" content="2019-06-03T21:45:52.000Z">
+<meta property="article:modified_time" content="2022-11-06T21:02:52.149Z">
+<meta property="article:author" content="kccarlos">
+<meta property="article:tag" content="Ubuntu">
+<meta property="article:tag" content="Samba">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://kccarlos.github.io/uploads/samba_logo.png">
+  
+    <link rel="alternate" href="/atom.xml" title="KCCarlos's Notes" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">KCCarlos&#39;s Notes</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://kccarlos.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-How-to-install-and-configure-Samba-on-Ubuntu-14-04" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2019/06/03/How-to-install-and-configure-Samba-on-Ubuntu-14-04/" class="article-date">
+  <time class="dt-published" datetime="2019-06-03T21:45:52.000Z" itemprop="datePublished">2019-06-03</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Linux/">Linux</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      How to Install and Configure Samba on Ubuntu 14.04
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><img src="/uploads/samba_logo.png" alt="Samba Logo"></p>
+<span id="more"></span>
+<p>I am using AWS EC2 for model training, which is running Ubuntu 14.04. Samba can make file access and transfer between Windows and Linux so much easier. </p>
+<h2 id="1-Install-Samba"><a href="#1-Install-Samba" class="headerlink" title="1. Install Samba"></a>1. Install Samba</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install samba samba-common</span><br><span class="line">sudo apt-get install python-glade2 system-config-samba</span><br><span class="line">sudo apt-get install libtall <span class="comment"># Don&#x27;t forget to install this</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2a-Configurations-for-a-publicly-shared-folder"><a href="#2a-Configurations-for-a-publicly-shared-folder" class="headerlink" title="2a. Configurations for a publicly shared folder"></a>2a. Configurations for a publicly shared folder</h2><h3 id="Operations-on-Ubuntu"><a href="#Operations-on-Ubuntu" class="headerlink" title="Operations on Ubuntu"></a>Operations on Ubuntu</h3><p>Say we want to share the <em>public</em> folder under <em>mnt</em></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">mkdir</span> -p /mnt/public</span><br><span class="line">sudo <span class="built_in">chown</span> nobody:nogroup /mnt/public</span><br><span class="line">sudo <span class="built_in">cp</span> /etc/samba/smb.conf /etc/samba/smb.conf.bak</span><br><span class="line">sudo vim /etc/samba/smb.conf</span><br></pre></td></tr></table></figure>
+<p>Add the following lines to the bottom of the configuration file</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[public]</span><br><span class="line">   comment = Public share</span><br><span class="line">   path = /mnt/public</span><br><span class="line">   browsable = yes</span><br><span class="line">   writable = yes</span><br><span class="line">   guest ok = yes</span><br><span class="line">   read only = no</span><br><span class="line">   force user = nobody</span><br><span class="line">   force group = nogroup</span><br></pre></td></tr></table></figure>
+<p>Finally do some checkings and restart Samba service</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">testparm <span class="comment"># test if the configuration is written correctly</span></span><br><span class="line">sudo service smbd restart</span><br></pre></td></tr></table></figure>
+<h3 id="Operations-on-Windows"><a href="#Operations-on-Windows" class="headerlink" title="Operations on Windows"></a>Operations on Windows</h3><h2 id="2b-Configurations-for-a-securely-shared-folder"><a href="#2b-Configurations-for-a-securely-shared-folder" class="headerlink" title="2b. Configurations for a securely shared folder"></a>2b. Configurations for a securely shared folder</h2><figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo <span class="built_in">mkdir</span> -p /mnt/secured</span><br><span class="line">sudo addgroup smbproj1</span><br><span class="line">sudo <span class="built_in">chown</span> root:smbproj1  /mnt/secured</span><br><span class="line">sudo <span class="built_in">chmod</span> 770 /mnt/secured</span><br><span class="line">sudo vim /etc/samba/smb.conf</span><br></pre></td></tr></table></figure>
+<p>Add the following lines:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[secured]</span><br><span class="line">   comment = Secure share access</span><br><span class="line">   path = /mnt/secured</span><br><span class="line">   valid users = @smbproj1</span><br><span class="line">   browsable = yes</span><br><span class="line">   writable = yes</span><br><span class="line">   guest ok = no</span><br></pre></td></tr></table></figure>
+<p>Add a new user to the group and restart Samba</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo useradd carlos -s /usr/sbin/nologin -G smbproj1</span><br><span class="line">sudo smbpasswd -a carlos</span><br><span class="line">   <span class="comment"># if the user already exists,</span></span><br><span class="line">   <span class="comment"># use this command to add it to the group  </span></span><br><span class="line">   <span class="comment"># sudo usermod ubuntu -G smbproj1</span></span><br><span class="line">testparm</span><br><span class="line">sudo service smbd restart</span><br></pre></td></tr></table></figure>
+<p>Then login again to let the changes take effect.</p>
+<h2 id="3-References"><a href="#3-References" class="headerlink" title="3. References"></a>3. References</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://blog.csdn.net/lan120576664/article/details/50396511">https://blog.csdn.net/lan120576664/article/details/50396511</a></li>
+<li><a target="_blank" rel="noopener" href="https://wiki.ubuntu.com/Ubuntu_14.04_LTS">https://wiki.ubuntu.com/Ubuntu_14.04_LTS</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.cnblogs.com/liuquan/p/5644760.html">https://www.cnblogs.com/liuquan/p/5644760.html</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.krizna.com/ubuntu/setup-file-server-ubuntu-14-04-samba/#anonymous">https://www.krizna.com/ubuntu/setup-file-server-ubuntu-14-04-samba/#anonymous</a></li>
+<li><a target="_blank" rel="noopener" href="https://blog.51cto.com/yangzhiming/1969556">https://blog.51cto.com/yangzhiming/1969556</a></li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://kccarlos.github.io/2019/06/03/How-to-install-and-configure-Samba-on-Ubuntu-14-04/" data-id="cla5ucltm0004akz10w59em41" data-title="How to Install and Configure Samba on Ubuntu 14.04" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Samba/" rel="tag">Samba</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2022/10/15/Cracking-and-Patching-the-Google-XSS-Game/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Cracking and Patching the Google XSS Game
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2019/03/18/Build-OpenCV-3.4.5-from-source-for-Anaconda-on-Ubuntu-16.04-with-CUDA/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Build OpenCV 3.4.5 From Source for Anaconda on Ubuntu 16.04 With Cuda</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Computer-Vision/">Computer-Vision</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Database/">Database</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/web-security/">web-security</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hacking/" rel="tag">Hacking</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MacOS/" rel="tag">MacOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenCV/" rel="tag">OpenCV</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Samba/" rel="tag">Samba</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XSS/" rel="tag">XSS</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Hacking/" style="font-size: 10px;">Hacking</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/OpenCV/" style="font-size: 10px;">OpenCV</a> <a href="/tags/Samba/" style="font-size: 10px;">Samba</a> <a href="/tags/Ubuntu/" style="font-size: 20px;">Ubuntu</a> <a href="/tags/XSS/" style="font-size: 10px;">XSS</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">October 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/10/15/Cracking-and-Patching-the-Google-XSS-Game/">Cracking and Patching the Google XSS Game</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/03/How-to-install-and-configure-Samba-on-Ubuntu-14-04/">How to Install and Configure Samba on Ubuntu 14.04</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/18/Build-OpenCV-3.4.5-from-source-for-Anaconda-on-Ubuntu-16.04-with-CUDA/">Build OpenCV 3.4.5 From Source for Anaconda on Ubuntu 16.04 With Cuda</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/11/How-to-Setup-phpmyadmin-on-MacOS/">How to Setup Phpmyadmin on MacOS</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 kccarlos<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>

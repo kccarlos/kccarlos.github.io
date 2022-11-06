@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>How to Setup Phpmyadmin on MacOS | KCCarlos&#39;s Notes</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta property="og:type" content="article">
+<meta property="og:title" content="How to Setup Phpmyadmin on MacOS">
+<meta property="og:url" content="https://kccarlos.github.io/2018/11/11/How-to-Setup-phpmyadmin-on-MacOS/index.html">
+<meta property="og:site_name" content="KCCarlos&#39;s Notes">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://kccarlos.github.io/uploads/Phpmyadmin_logo.png">
+<meta property="og:image" content="https://i.loli.net/2018/11/19/5bf2c0f9e5366.png">
+<meta property="og:image" content="https://i.loli.net/2018/11/19/5bf2bb3966584.png">
+<meta property="article:published_time" content="2018-11-11T15:23:15.000Z">
+<meta property="article:modified_time" content="2022-11-06T21:02:17.869Z">
+<meta property="article:author" content="kccarlos">
+<meta property="article:tag" content="MySQL">
+<meta property="article:tag" content="MacOS">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://kccarlos.github.io/uploads/Phpmyadmin_logo.png">
+  
+    <link rel="alternate" href="/atom.xml" title="KCCarlos's Notes" type="application/atom+xml">
+  
+  
+    <link rel="shortcut icon" href="/favicon.png">
+  
+  
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
+
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+    
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
+
+  
+<meta name="generator" content="Hexo 6.3.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">KCCarlos&#39;s Notes</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://kccarlos.github.io"></form>
+      </div>
+    </div>
+  </div>
+</header>
+
+      <div class="outer">
+        <section id="main"><article id="post-How-to-Setup-phpmyadmin-on-MacOS" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  <div class="article-meta">
+    <a href="/2018/11/11/How-to-Setup-phpmyadmin-on-MacOS/" class="article-date">
+  <time class="dt-published" datetime="2018-11-11T15:23:15.000Z" itemprop="datePublished">2018-11-11</time>
+</a>
+    
+  <div class="article-category">
+    <a class="article-category-link" href="/categories/Database/">Database</a>
+  </div>
+
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="p-name article-title" itemprop="headline name">
+      How to Setup Phpmyadmin on MacOS
+    </h1>
+  
+
+      </header>
+    
+    <div class="e-content article-entry" itemprop="articleBody">
+      
+        <p><img src="/uploads/Phpmyadmin_logo.png" alt="phpmyadmin_logo"></p>
+<span id="more"></span>
+<p>Since I am using Mac and I am desperately in need to test PHP, I researched on how to use phpmyadmin on MacOS. It seems Mac has apache built-in so there is no need to install another one. Here I summarize the steps I took to make it work:</p>
+<h2 id="Start-the-built-in-apache"><a href="#Start-the-built-in-apache" class="headerlink" title="Start the built in apache"></a>Start the built in apache</h2><p>Run the following command</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apachectl start</span><br></pre></td></tr></table></figure>
+<p>Browse to localhost, then if “It works” is printed, the apache is started properly.</p>
+<h2 id="Enable-php"><a href="#Enable-php" class="headerlink" title="Enable php"></a>Enable php</h2><p>Modify httpd.conf</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vi /etc/apache2/httpd.conf</span><br></pre></td></tr></table></figure>
+<p>Find and uncomment this line (Remove #)</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LoadModule php7_module libexec/apache2/libphp7.so</span><br></pre></td></tr></table></figure>
+<p>Restart apache</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apachectl restart</span><br></pre></td></tr></table></figure>
+
+<h2 id="Configure-the-home-directory"><a href="#Configure-the-home-directory" class="headerlink" title="Configure the home directory"></a>Configure the home directory</h2><p>The message “It works” comes from the &#x2F;Library&#x2F;WebServer&#x2F;Documents&#x2F;info.php<br>Now we want to change the directory to User&#x2F;Sites.<br>Create a folder named “Sites” under your User folder. Then, run command</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vi /etc/apache2/httpd.conf</span><br></pre></td></tr></table></figure>
+<p>Change both occurances of “&#x2F;Library&#x2F;WebServer&#x2F;Documents&#x2F;“ from</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DocumentRoot &quot;/Library/WebServer/Documents/&quot;</span><br><span class="line">&lt;Directory &quot;/Library/WebServer/Documents/&quot;&gt;</span><br></pre></td></tr></table></figure>
+<p>to</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">DocumentRoot &quot;/Users/Carlos/Sites&quot;</span><br><span class="line">&lt;Directory &quot;/Users/Carlos/Sites&quot;&gt;</span><br></pre></td></tr></table></figure>
+<p>Again, don’t forget to restart apache</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apachectl restart</span><br></pre></td></tr></table></figure>
+
+<h2 id="Check-apache"><a href="#Check-apache" class="headerlink" title="Check apache"></a>Check apache</h2><p>Now we add a php file named index.php to the Sites folder we created.</p>
+<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"><span class="keyword">echo</span> <span class="string">&quot;Success!&quot;</span>;</span><br><span class="line"><span class="title function_ invoke__">phpinfo</span>();</span><br><span class="line"><span class="meta">?&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>Then, naviagate browser  to localhost and You can see the word “Success!”<br><img src="https://i.loli.net/2018/11/19/5bf2c0f9e5366.png" alt="1b.png"></p>
+<h2 id="Setup-phpmyadmin"><a href="#Setup-phpmyadmin" class="headerlink" title="Setup phpmyadmin"></a>Setup phpmyadmin</h2><ol>
+<li><p>Download the software from official website. <a target="_blank" rel="noopener" href="https://www.phpmyadmin.net/downloads/">https://www.phpmyadmin.net/downloads/</a></p>
+</li>
+<li><p>Unzip the installation file inside the “Sites” folder.</p>
+</li>
+</ol>
+<p>Don’t forget to rename the folder name so that it is easier to access via browser. I choose the name “phpmyadmin”.<br><img src="https://i.loli.net/2018/11/19/5bf2bb3966584.png" alt="1a.png"></p>
+<ol start="3">
+<li>Create a setup file<br>Navigate browser to <a target="_blank" rel="noopener" href="http://localhost/phpmyadmin/setup">http://localhost/phpmyadmin/setup</a>.</li>
+</ol>
+<p>Click on “New server”. Type in the hostname, password, username of the mysql server. After applying the settings, click download. Place the downloaded file into phpmyadmin folder. <strong>NOTICE</strong>: If you are using local mysql server, input the host name as 127.0.0.1</p>
+<h2 id="Login-to-phpmyadmin"><a href="#Login-to-phpmyadmin" class="headerlink" title="Login to phpmyadmin"></a>Login to phpmyadmin</h2><p>Navigate to localhost&#x2F;phpmyadmin. Now you can login with the username and password.</p>
+<h2 id="References"><a href="#References" class="headerlink" title="References:"></a>References:</h2><ol>
+<li><a target="_blank" rel="noopener" href="https://jason.pureconcepts.net/2014/11/configure-apache-virtualhost-mac-os-x/">https://jason.pureconcepts.net/2014/11/configure-apache-virtualhost-mac-os-x/</a></li>
+<li><a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=YzlFqNXJgfM">https://www.youtube.com/watch?v=YzlFqNXJgfM</a></li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://kccarlos.github.io/2018/11/11/How-to-Setup-phpmyadmin-on-MacOS/" data-id="cla5ucltn0005akz1f0xb15ad" data-title="How to Setup Phpmyadmin on MacOS" class="article-share-link">Share</a>
+      
+      
+      
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MacOS/" rel="tag">MacOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li></ul>
+
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2019/03/18/Build-OpenCV-3.4.5-from-source-for-Anaconda-on-Ubuntu-16.04-with-CUDA/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Build OpenCV 3.4.5 From Source for Anaconda on Ubuntu 16.04 With Cuda
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/categories/Computer-Vision/">Computer-Vision</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Database/">Database</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/Linux/">Linux</a></li><li class="category-list-item"><a class="category-list-link" href="/categories/web-security/">web-security</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Hacking/" rel="tag">Hacking</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MacOS/" rel="tag">MacOS</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/MySQL/" rel="tag">MySQL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/OpenCV/" rel="tag">OpenCV</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Samba/" rel="tag">Samba</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/Ubuntu/" rel="tag">Ubuntu</a></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/XSS/" rel="tag">XSS</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/tags/Hacking/" style="font-size: 10px;">Hacking</a> <a href="/tags/MacOS/" style="font-size: 10px;">MacOS</a> <a href="/tags/MySQL/" style="font-size: 10px;">MySQL</a> <a href="/tags/OpenCV/" style="font-size: 10px;">OpenCV</a> <a href="/tags/Samba/" style="font-size: 10px;">Samba</a> <a href="/tags/Ubuntu/" style="font-size: 20px;">Ubuntu</a> <a href="/tags/XSS/" style="font-size: 10px;">XSS</a>
+    </div>
+  </div>
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2022/10/">October 2022</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/06/">June 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2019/03/">March 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2018/11/">November 2018</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2022/10/15/Cracking-and-Patching-the-Google-XSS-Game/">Cracking and Patching the Google XSS Game</a>
+          </li>
+        
+          <li>
+            <a href="/2019/06/03/How-to-install-and-configure-Samba-on-Ubuntu-14-04/">How to Install and Configure Samba on Ubuntu 14.04</a>
+          </li>
+        
+          <li>
+            <a href="/2019/03/18/Build-OpenCV-3.4.5-from-source-for-Anaconda-on-Ubuntu-16.04-with-CUDA/">Build OpenCV 3.4.5 From Source for Anaconda on Ubuntu 16.04 With Cuda</a>
+          </li>
+        
+          <li>
+            <a href="/2018/11/11/How-to-Setup-phpmyadmin-on-MacOS/">How to Setup Phpmyadmin on MacOS</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      
+      &copy; 2022 kccarlos<br>
+      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+
+  
+<script src="/fancybox/jquery.fancybox.min.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+
+  </div>
+</body>
+</html>
