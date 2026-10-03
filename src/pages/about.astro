@@ -1,0 +1,10 @@
+---
+import { getEntry, render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+const about = await getEntry('about', 'about');
+const { Content } = await render(about!);
+---
+<Base title="About">
+  <img class="avatar" src="/avatar.jpeg" alt="KC" width="96" height="96" />
+  <Content />
+</Base>

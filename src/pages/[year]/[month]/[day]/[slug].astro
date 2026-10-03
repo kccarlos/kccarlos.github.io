@@ -1,0 +1,30 @@
+---
+import { render } from 'astro:content';
+import Base from '../../../../layouts/Base.astro';
+import { formatDate, getPosts, postPath, slugify } from '../../../../lib';
+
+export async function getStaticPaths() {
+  const posts = await getPosts();
+  return posts.map((post) => {
+    const [, year, month, day, slug] = postPath(post).split('/');
+    return { params: { year, month, day, slug }, props: { post } };
+  });
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const { title, date, tags, categories } = post.data;
+---
+<Base title={title} description={post.data.description} type="article">
+  <article>
+    <h1>{title}</h1>
+    <p class="meta">
+      <time datetime={date.toISOString()}>{formatDate(date)}</time>
+      {categories.map((c) => <> · <a href={`/categories/${slugify(c)}/`}>{c}</a></>)}
+    </p>
+    <Content />
+    {tags.length > 0 && (
+      <p class="tags">{tags.map((t) => <a href={`/tags/${slugify(t)}/`}>{t}</a>)}</p>
+    )}
+  </article>
+</Base>

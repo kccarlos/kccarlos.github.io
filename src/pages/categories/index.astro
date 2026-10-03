@@ -1,0 +1,13 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getPosts, groupBy, slugify } from '../../lib';
+const groups = groupBy(await getPosts(), (p) => p.data.categories);
+---
+<Base title="Categories">
+  <h1>Categories</h1>
+  <ul class="posts">
+    {[...groups].map(([name, posts]) => (
+      <li><a href={`/categories/${slugify(name)}/`}>{name}</a> <span class="meta">{posts.length}</span></li>
+    ))}
+  </ul>
+</Base>

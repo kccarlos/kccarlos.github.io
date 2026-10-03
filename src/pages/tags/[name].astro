@@ -1,0 +1,15 @@
+---
+import Base from '../../layouts/Base.astro';
+import PostList from '../../components/PostList.astro';
+import { getPosts, groupBy, slugify } from '../../lib';
+
+export async function getStaticPaths() {
+  const groups = groupBy(await getPosts(), (p) => p.data.tags);
+  return [...groups].map(([name, posts]) => ({ params: { name: slugify(name) }, props: { name, posts } }));
+}
+const { name, posts } = Astro.props;
+---
+<Base title={name}>
+  <h1>{name}</h1>
+  <PostList posts={posts} />
+</Base>
