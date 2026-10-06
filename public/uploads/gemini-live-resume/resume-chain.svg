@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630" role="img" aria-labelledby="t d">
+  <title id="t">Gemini Live remembers exactly one resume</title>
+  <desc id="d">Connection 1 is fresh and holds 5,153 prompt tokens. Resuming it with handle H1 gives connection 2 with 5,191 tokens and every fact intact. Resuming connection 2 with its handle H2 gives connection 3 with 167 tokens: only the system prompt and what was said on connection 2.</desc>
+  <style>
+    .bg { fill: #fbf8f3; }
+    .h1 { font-family: ui-sans-serif, -apple-system, Helvetica, Arial, sans-serif; font-size: 40px; font-weight: 700; fill: #1f1d1a; }
+    .sub { font-family: ui-sans-serif, -apple-system, Helvetica, Arial, sans-serif; font-size: 22px; font-weight: 400; fill: #5b554c; }
+    .lab { font-family: ui-sans-serif, -apple-system, Helvetica, Arial, sans-serif; font-size: 24px; font-weight: 700; fill: #1f1d1a; }
+    .small { font-family: ui-sans-serif, -apple-system, Helvetica, Arial, sans-serif; font-size: 18px; font-weight: 400; fill: #5b554c; }
+    .mono { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 20px; font-weight: 600; fill: #1f1d1a; }
+    .big { font-family: ui-sans-serif, -apple-system, Helvetica, Arial, sans-serif; font-size: 52px; font-weight: 800; }
+    .ok { fill: #2f7d4f; }
+    .bad { fill: #c2412d; }
+    .box { fill: #ffffff; stroke: #d9d2c5; stroke-width: 2; }
+    .boxbad { fill: #fff4f1; stroke: #e7a294; stroke-width: 2; }
+    .arrow { stroke: #8a8174; stroke-width: 3; fill: none; }
+    .head { fill: #8a8174; }
+  </style>
+  <rect class="bg" width="1200" height="630" rx="24"/>
+  <text class="h1" x="60" y="86">Gemini Live remembers exactly one resume</text>
+  <text class="sub" x="60" y="124">Vertex AI · us-central1 · gemini-3.8-live · reproduced 9 of 9 runs, 2026-10-04</text>
+
+  <!-- conn 1 -->
+  <rect class="box" x="60" y="180" width="300" height="300" rx="18"/>
+  <text class="lab" x="86" y="224">conn 1 · fresh</text>
+  <text class="small" x="86" y="256">8 spoken facts</text>
+  <text class="big ok" x="86" y="350">5,153</text>
+  <text class="small" x="86" y="382">prompt tokens</text>
+  <text class="mono" x="86" y="450">issues handle H1</text>
+
+  <!-- arrow 1 -->
+  <path class="arrow" d="M370 330 H440"/>
+  <path class="head" d="M440 320 L460 330 L440 340 Z"/>
+  <text class="small" x="372" y="310">resume(H1)</text>
+
+  <!-- conn 2 -->
+  <rect class="box" x="470" y="180" width="300" height="300" rx="18"/>
+  <text class="lab" x="496" y="224">conn 2 · resumed</text>
+  <text class="small" x="496" y="256">one turn: "Ok."</text>
+  <text class="big ok" x="496" y="350">5,191</text>
+  <text class="small" x="496" y="382">8 of 8 facts recalled</text>
+  <text class="mono" x="496" y="450">issues handle H2</text>
+
+  <!-- arrow 2 -->
+  <path class="arrow" d="M780 330 H850"/>
+  <path class="head" d="M850 320 L870 330 L850 340 Z"/>
+  <text class="small" x="782" y="310">resume(H2)</text>
+
+  <!-- conn 3 -->
+  <rect class="boxbad" x="880" y="180" width="260" height="300" rx="18"/>
+  <text class="lab" x="906" y="224">conn 3</text>
+  <text class="small" x="906" y="256">resumed from a resume</text>
+  <text class="big bad" x="906" y="350">167</text>
+  <text class="small" x="906" y="382">0 of 8 facts recalled</text>
+  <text class="small" x="906" y="430">system prompt</text>
+  <text class="small" x="906" y="456">+ conn 2's own "Ok."</text>
+
+  <text class="sub" x="60" y="560">A handle issued by a resumed connection restores only that connection's own turns.</text>
+  <text class="sub" x="60" y="592">Everything it inherited is gone. The fix: resume once, then start fresh and re-seed.</text>
+</svg>

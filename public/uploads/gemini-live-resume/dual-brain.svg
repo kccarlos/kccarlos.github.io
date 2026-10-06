@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 560" width="1200" height="560" role="img" aria-labelledby="t d">
+  <title id="t">sheepdog's dual-brain voice layer</title>
+  <desc id="d">The phone streams audio to the sheepdog daemon. Inside it, Gemini Live is the fast brain: it hears, speaks and answers from briefings, but has no tool that acts. It hands the user's words to the slow brain with to_supervisor. The slow brain reads worker screens and acts on herdr panes, but only on the user's own words. It sends facts back to Gemini Live as function responses called briefings.</desc>
+  <style>
+    .bg { fill: #fbf8f3; }
+    .h { font-family: ui-sans-serif, -apple-system, Helvetica, Arial, sans-serif; font-size: 22px; font-weight: 700; fill: #1f1d1a; }
+    .t { font-family: ui-sans-serif, -apple-system, Helvetica, Arial, sans-serif; font-size: 17px; font-weight: 400; fill: #4a453d; }
+    .m { font-family: ui-monospace, Menlo, Consolas, monospace; font-size: 16px; font-weight: 600; fill: #1f1d1a; }
+    .cap { font-family: ui-sans-serif, -apple-system, Helvetica, Arial, sans-serif; font-size: 19px; font-weight: 400; fill: #5b554c; }
+    .box { fill: #ffffff; stroke: #d9d2c5; stroke-width: 2; }
+    .daemon { fill: #f3eee5; stroke: #cfc6b6; stroke-width: 2; stroke-dasharray: 6 5; }
+    .fast { fill: #eef5ff; stroke: #8fb2e3; stroke-width: 2; }
+    .slow { fill: #f1f8f1; stroke: #93c3a0; stroke-width: 2; }
+    .line { stroke: #8a8174; stroke-width: 2.5; fill: none; }
+    .head { fill: #8a8174; }
+  </style>
+  <rect class="bg" width="1200" height="560" rx="24"/>
+
+  <!-- phone -->
+  <rect class="box" x="40" y="150" width="190" height="200" rx="18"/>
+  <text class="h" x="62" y="192">Phone</text>
+  <text class="t" x="62" y="222">Sheepdog app</text>
+  <text class="t" x="62" y="260">mic in · speaker out</text>
+  <text class="t" x="62" y="290">approval cards</text>
+  <text class="t" x="62" y="320">agent windows</text>
+
+  <path class="line" d="M232 250 H282"/>
+  <path class="head" d="M282 242 L298 250 L282 258 Z"/>
+  <path class="head" d="M248 242 L232 250 L248 258 Z"/>
+  <text class="t" x="236" y="236">audio</text>
+
+  <!-- daemon -->
+  <rect class="daemon" x="300" y="40" width="620" height="420" rx="22"/>
+  <text class="h" x="324" y="76">sheepdog daemon</text>
+
+  <rect class="fast" x="324" y="100" width="572" height="120" rx="16"/>
+  <text class="h" x="346" y="136">Fast brain · Gemini Live</text>
+  <text class="t" x="346" y="166">hears, speaks, takes turns, answers simple things from briefings</text>
+  <text class="t" x="346" y="194">no tool that acts: only to_supervisor and stop</text>
+
+  <rect class="slow" x="324" y="310" width="572" height="126" rx="16"/>
+  <text class="h" x="346" y="346">Slow brain · text LLM</text>
+  <text class="t" x="346" y="376">reads screens, investigates, decides, acts</text>
+  <text class="t" x="346" y="404">writes only on the user's own words (the rail)</text>
+
+  <!-- down: to_supervisor -->
+  <path class="line" d="M420 222 V300"/>
+  <path class="head" d="M412 300 L420 316 L428 300 Z"/>
+  <text class="m" x="434" y="258">to_supervisor(</text>
+  <text class="m" x="434" y="280">  the user's words)</text>
+  <!-- up: briefings -->
+  <path class="line" d="M840 308 V230"/>
+  <path class="head" d="M832 230 L840 214 L848 230 Z"/>
+  <text class="m" x="826" y="258" text-anchor="end">briefings =</text>
+  <text class="m" x="826" y="280" text-anchor="end">function responses</text>
+
+  <!-- herdr -->
+  <rect class="box" x="966" y="250" width="200" height="200" rx="18"/>
+  <text class="h" x="988" y="292">herdr panes</text>
+  <text class="t" x="988" y="324">Claude Code</text>
+  <text class="t" x="988" y="352">Codex</text>
+  <text class="t" x="988" y="380">… more agents</text>
+  <path class="line" d="M898 373 H950"/>
+  <path class="head" d="M950 365 L966 373 L950 381 Z"/>
+  <text class="t" x="902" y="358">keys</text>
+
+  <text class="cap" x="40" y="508">Gemini Live gets facts, not scripts. Every briefing is a function response to a call it never made,</text>
+  <text class="cap" x="40" y="536">labelled with who it is from, when, and how it relates to what came before.</text>
+</svg>
