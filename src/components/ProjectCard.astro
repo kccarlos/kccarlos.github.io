@@ -1,0 +1,30 @@
+---
+import Icon from './Icon.astro';
+import type { Project } from '../data/projects';
+interface Props { project: Project }
+const { project: p } = Astro.props;
+---
+<article class="project">
+  <img class="logo" src={p.logo} alt="" width="56" height="56" loading="lazy" />
+  <div class="info">
+  <div class="row">
+    <h3>{p.name}</h3>
+    <span class="plat">{p.platform}</span>
+    {p.status && <span class="status">🚧 {p.status}</span>}
+    {p.github && <a class="chip" href={p.github} target="_blank" rel="noopener"><Icon name="github" size={13} /> GitHub</a>}
+    {p.install.map((i) =>
+      i.kind === 'link' ? (
+        <a class="chip install" href={i.href} target="_blank" rel="noopener">{i.label} ↗</a>
+      ) : i.kind === 'copy' ? (
+        <button class="chip install copy" type="button" data-copy={i.command} title={i.command}>
+          <span class="ps">$</span> {i.label} <span class="hint">copy</span>
+        </button>
+      ) : (
+        <span class="chip pending">{i.label}</span>
+      )
+    )}
+    <span class="stack">{p.stack.join(' · ')}</span>
+  </div>
+  <p class="desc">{p.description}</p>
+  </div>
+</article>

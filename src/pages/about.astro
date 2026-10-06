@@ -1,10 +1,41 @@
 ---
 import { getEntry, render } from 'astro:content';
 import Base from '../layouts/Base.astro';
+import Icon from '../components/Icon.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { SITE } from '../lib';
+import { projectGroups } from '../data/projects';
 const about = await getEntry('about', 'about');
 const { Content } = await render(about!);
 ---
 <Base title="About">
-  <img class="avatar" src="/avatar.jpeg" alt="KC" width="96" height="96" />
-  <Content />
+  <div class="about"><Content /></div>
+  {projectGroups.map((g) => (
+    <section class="project-group">
+      <h2>{g.title}</h2>
+      {g.projects.map((p) => <ProjectCard project={p} />)}
+    </section>
+  ))}
+  <section class="about contact">
+    <h3>How to find me on the 🌐</h3>
+    <p>
+      <a href={SITE.github}><Icon name="github" size={15} /> GitHub</a> ·
+      <a href={SITE.linkedin}><Icon name="linkedin" size={15} /> LinkedIn</a>
+    </p>
+    <ul class="emails">
+      <li><span class="tag">📧 Work</span> kccarlos DOT an AT the email service offered by Google</li>
+      <li><span class="tag">🐛 Open source &amp; feedback</span> kccarlos DOT opensource AT the email service offered by Google</li>
+    </ul>
+    <p class="alum">🎓 Alum of JHU, HK PolyU and HKUST.</p>
+  </section>
 </Base>
+<script is:inline>
+  document.querySelectorAll('button[data-copy]').forEach(function (b) {
+    b.addEventListener('click', function () {
+      navigator.clipboard.writeText(b.dataset.copy).then(function () {
+        var h = b.querySelector('.hint'); var old = h.textContent; h.textContent = 'copied ✓';
+        setTimeout(function () { h.textContent = old; }, 1600);
+      });
+    });
+  });
+</script>
