@@ -9,6 +9,7 @@ export const SITE = {
   tagline: 'Notes by KC on AI engineering, full-stack and ad systems.',
   url: 'https://kccarlos.github.io',
   github: 'https://github.com/kccarlos',
+  repo: 'https://github.com/kccarlos/kccarlos.github.io',
   linkedin: 'https://www.linkedin.com/in/kecheng-an/',
 };
 

@@ -83,7 +83,13 @@ const nav = [
     <main><div class={wide ? 'wrap wide' : 'wrap'}><slot /></div></main>
     <footer class="site">
       <div class="wrap">
-        <span>© {new Date().getFullYear()} {SITE.author} · made with 🧋 &amp; Astro</span>
+        <span class="legal">
+          <span>© {new Date().getFullYear()} {SITE.author} · made with 🧋 &amp; Astro</span>
+          <span>
+            <a href={`${SITE.repo}/blob/source/LICENSE`}>code: MIT</a> ·
+            <a href={`${SITE.repo}/blob/source/LICENSE-CONTENT`}>articles: CC BY 4.0</a>
+          </span>
+        </span>
         <span class="links">
           <a href={SITE.github} aria-label="GitHub"><Icon name="github" size={18} /></a>
           <a href={SITE.linkedin} aria-label="LinkedIn"><Icon name="linkedin" size={18} /></a>

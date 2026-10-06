@@ -210,3 +210,7 @@ ul.plain .meta { color: var(--dim); font: .75rem var(--mono); }
 .about .emails { list-style: none; padding: 0; margin: .6rem 0 0; }
 .about .emails li { margin: .9rem 0; display: flex; flex-direction: column; align-items: flex-start; gap: .35rem; }
 .emails .tag { display: inline-block; font: 500 .78rem/1 var(--mono); color: var(--green); background: color-mix(in srgb, var(--green) 14%, transparent); padding: .3rem .55rem; border-radius: 7px; }
+
+footer .legal { display: flex; flex-direction: column; gap: .25rem; }
+footer .legal a { color: var(--muted); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--line); }
+footer .legal a:hover { color: var(--accent); }
