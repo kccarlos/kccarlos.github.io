@@ -1,6 +1,7 @@
 ---
 title: Build OpenCV 3.4.5 from source for Anaconda on Ubuntu 16.04 with Cuda
 date: 2019-03-18 20:13:40
+archived: true
 categories: Computer-Vision
 tags:
 - OpenCV

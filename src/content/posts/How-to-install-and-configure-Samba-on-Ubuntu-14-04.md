@@ -1,6 +1,7 @@
 ---
 title: How to install and configure Samba on Ubuntu 14.04
 date: 2019-06-03 17:45:52
+archived: true
 categories: Linux
 tags:
 - Samba

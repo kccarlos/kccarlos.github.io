@@ -1,0 +1,29 @@
+---
+import Base from '../layouts/Base.astro';
+import PostList from '../components/PostList.astro';
+import { getPosts, isActive } from '../lib';
+const all = await getPosts();
+const posts = all.filter(isActive);
+const archived = all.filter((p) => !isActive(p));
+const years = [...new Set(posts.map((p) => p.data.date.getUTCFullYear()))];
+---
+<Base title="All Posts" wide>
+  <h1><span class="ps">~/</span>writing</h1>
+  <p class="lede">Browse by year · <a href="/tags/">tags</a> · <a href="/categories/">categories</a></p>
+  {years.map((y) => {
+    const list = posts.filter((p) => p.data.date.getUTCFullYear() === y);
+    return (
+      <section>
+        <h2 class="year section-title">{y}<sup>{list.length}</sup></h2>
+        <PostList posts={list} />
+      </section>
+    );
+  })}
+  {archived.length > 0 && (
+    <section class="archive">
+      <h2 class="section-title"><span class="ps">~/</span>archive<sup>{archived.length}</sup></h2>
+      <p class="lede">Older notes from 2018–2022. Kept for the links, but they may be out of date.</p>
+      <PostList posts={archived} />
+    </section>
+  )}
+</Base>

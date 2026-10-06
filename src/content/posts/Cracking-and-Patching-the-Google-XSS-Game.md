@@ -1,6 +1,8 @@
 ---
 title: Cracking and Patching the Google XSS Game
 date: 2022-10-15 15:25:07
+archived: true
+description: Solutions to Google's XSS game, a patched re-implementation in Python Flask, and some thoughts on defending with Content Security Policy.
 categories: Web-Security
 tags:
 - XSS

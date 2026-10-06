@@ -5,7 +5,7 @@ const groups = groupBy(await getPosts(), (p) => p.data.tags);
 ---
 <Base title="Tags">
   <h1>Tags</h1>
-  <ul class="posts">
+  <ul class="plain">
     {[...groups].map(([name, posts]) => (
       <li><a href={`/tags/${slugify(name)}/`}>{name}</a> <span class="meta">{posts.length}</span></li>
     ))}

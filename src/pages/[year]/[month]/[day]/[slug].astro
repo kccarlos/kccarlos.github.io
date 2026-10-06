@@ -1,7 +1,8 @@
 ---
 import { render } from 'astro:content';
 import Base from '../../../../layouts/Base.astro';
-import { formatDate, getPosts, postPath, slugify } from '../../../../lib';
+import Share from '../../../../components/Share.astro';
+import { formatDate, getPosts, ogSlug, postPath, readingMinutes, slugify, excerpt } from '../../../../lib';
 
 export async function getStaticPaths() {
   const posts = await getPosts();
@@ -15,16 +16,20 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 const { title, date, tags, categories } = post.data;
 ---
-<Base title={title} description={post.data.description} type="article">
+<Base title={title} description={excerpt(post)} type="article" image={`/og/${ogSlug(post)}.png`} published={date}>
   <article>
+    {post.data.archived && (
+      <p class="archived-note"><span class="ps">#</span> Archived — written in {date.getUTCFullYear()}, so the steps and versions here may be out of date.</p>
+    )}
     <h1>{title}</h1>
     <p class="meta">
-      <time datetime={date.toISOString()}>{formatDate(date)}</time>
+      <time datetime={date.toISOString()}>{formatDate(date)}</time> • {readingMinutes(post)} min read
       {categories.map((c) => <> · <a href={`/categories/${slugify(c)}/`}>{c}</a></>)}
     </p>
     <Content />
     {tags.length > 0 && (
       <p class="tags">{tags.map((t) => <a href={`/tags/${slugify(t)}/`}>{t}</a>)}</p>
     )}
+    <Share url={new URL(postPath(post), Astro.site).href} title={title} />
   </article>
 </Base>

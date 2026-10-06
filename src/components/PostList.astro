@@ -1,13 +1,33 @@
 ---
-import { formatDate, postPath, type Post } from '../lib';
+import { excerpt, formatDate, leadImage, ogSlug, postPath, readingMinutes, slugify, type Post } from '../lib';
 interface Props { posts: Post[] }
 const { posts } = Astro.props;
 ---
-<ul class="posts">
-  {posts.map((p) => (
-    <li>
-      <time datetime={p.data.date.toISOString()}>{formatDate(p.data.date)}</time>
-      <a href={postPath(p)}>{p.data.title}</a>
-    </li>
-  ))}
+<ul class="cards">
+  {posts.map((p) => {
+    const img = leadImage(p);
+    return (
+      <li>
+        <a class="card" href={postPath(p)}>
+          <div class="bar">
+            <i class="d r"></i><i class="d y"></i><i class="d g"></i>
+            <span class="file">{ogSlug(p).toLowerCase().slice(0, 28)}.md</span>
+          </div>
+          <div class="thumb">
+            {img ? <img src={img.src} alt="" loading="lazy" /> : <span class="ph">{p.data.title.slice(0, 1)}</span>}
+          </div>
+          <div class="body">
+            <div class="meta">
+              <time datetime={p.data.date.toISOString()}>{formatDate(p.data.date)}</time> · {readingMinutes(p)} min
+            </div>
+            <h3>{p.data.title}</h3>
+            <p>{excerpt(p, 120)}</p>
+            <div class="chips">
+              {p.data.tags.slice(0, 3).map((t) => <span>#{t.replace(/\s+/g, '-')}</span>)}
+            </div>
+          </div>
+        </a>
+      </li>
+    );
+  })}
 </ul>

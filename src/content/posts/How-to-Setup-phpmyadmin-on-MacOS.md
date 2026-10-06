@@ -1,6 +1,7 @@
 ---
 title: How to Setup phpmyadmin on MacOS
 date: 2018-11-11 10:23:15
+archived: true
 header-img:
 tags:
 - MySQL

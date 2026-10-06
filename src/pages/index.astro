@@ -1,9 +1,30 @@
 ---
 import Base from '../layouts/Base.astro';
 import PostList from '../components/PostList.astro';
-import { getPosts } from '../lib';
-const posts = await getPosts();
+import { getPosts, isActive, postPath } from '../lib';
+const posts = (await getPosts()).filter(isActive);
 ---
-<Base>
+<Base wide>
+  <section class="hero">
+    <h1>Notes on <span class="grad">building</span>, <span class="grad">breaking</span> &amp; understanding software.</h1>
+    <div class="term">
+      <div class="bar"><i class="d r"></i><i class="d y"></i><i class="d g"></i><span class="file">kc@blog: ~</span></div>
+      <div class="term-body">
+        <img class="avatar" src="/avatar.jpeg" alt="KC" width="72" height="72" />
+        <div class="lines">
+          <p><span class="ps">$</span> whoami</p>
+          <p class="out">kc — AI engineer · full-stack · ad systems <span class="kao">(◕‿◕)</span></p>
+          <p><span class="ps">$</span> ls writing/ | wc -l</p>
+          <p class="out">{posts.length} {posts.length === 1 ? 'article' : 'articles'}, still curious<span class="cursor" aria-hidden="true"></span></p>
+        </div>
+      </div>
+    </div>
+    <p class="actions">
+      <a class="btn primary" href={postPath(posts[0])}>read the latest →</a>
+      <a class="btn ghost" href="/rss.xml">rss</a>
+      <a class="btn ghost" href="/posts/">all writing</a>
+    </p>
+  </section>
+  <h2 class="section-title"><span class="ps">~/</span>writing</h2>
   <PostList posts={posts} />
 </Base>
