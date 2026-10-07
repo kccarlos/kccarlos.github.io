@@ -76,7 +76,7 @@ export const projectGroups: { title: string; projects: Project[] }[] = [
       {
         name: 'gitcontext',
         logo: '/projects/gitcontext.png',
-        platform: 'Web · macOS · Windows',
+        platform: 'Web · macOS · Windows · Linux',
         github: 'https://github.com/kccarlos/gitcontext',
         install: [
           { kind: 'copy', label: 'brew install', command: 'brew install --cask kccarlos/tap/gitcontext' },
