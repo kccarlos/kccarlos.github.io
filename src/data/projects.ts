@@ -79,6 +79,7 @@ export const projectGroups: { title: string; projects: Project[] }[] = [
         platform: 'Web · macOS · Windows',
         github: 'https://github.com/kccarlos/gitcontext',
         install: [
+          { kind: 'copy', label: 'brew install', command: 'brew install --cask kccarlos/tap/gitcontext' },
           { kind: 'link', label: 'Open web app', href: 'https://gitcontext.xyz/' },
           { kind: 'link', label: 'Download', href: 'https://github.com/kccarlos/gitcontext/releases/latest' },
         ],
