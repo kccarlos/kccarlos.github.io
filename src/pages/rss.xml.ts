@@ -12,6 +12,7 @@ export async function GET(context: APIContext) {
   return rss({
     title: SITE.title,
     description: SITE.description,
+    customData: '<language>en</language>',
     site: context.site!,
     items: posts.map((p) => ({
       title: p.data.title,

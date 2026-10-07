@@ -4,7 +4,7 @@ export type Post = CollectionEntry<'posts'>;
 
 export const SITE = {
   title: 'KC Blog',
-  description: 'Curiosity',
+  description: 'Curiosity, compiled.',
   author: 'kccarlos',
   tagline: 'Notes by KC on AI engineering, full-stack and ad systems.',
   url: 'https://kccarlos.github.io',
