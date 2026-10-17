@@ -47,9 +47,11 @@ export const projects: Project[] = [
     logo: '/projects/forumind.png',
     platform: 'iOS · iPadOS',
     github: 'https://github.com/kccarlos/forumind',
-    // When the TestFlight link is ready, add { kind: 'link', label: 'TestFlight', href: '…' }.
-    // Once approved, replace the pending item with the App Store link.
-    install: [{ kind: 'pending', label: 'App Store: review in progress' }],
+    // Once the App Store review passes, replace the pending item with the App Store link.
+    install: [
+      { kind: 'link', label: 'iOS TestFlight', href: 'https://testflight.apple.com/join/XsfttG4P' },
+      { kind: 'pending', label: 'App Store: review in progress' },
+    ],
     stack: ['Swift', 'SwiftUI', 'Foundation Models', 'CloudKit'],
     description:
       'An AI reading companion for Discourse forums: summaries, chat, and "Ask the forum" answers with sources.',
