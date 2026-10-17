@@ -67,11 +67,15 @@ export const projectGroups: { title: string; projects: Project[] }[] = [
       {
         name: 'herdr-sheepdog',
         logo: '/projects/herdr-sheepdog.png',
-        platform: 'CLI · iOS',
-        install: [],
-        stack: ['Go', 'Swift'],
-        status: 'under construction',
-        description: 'A voice supervisor for fleets of coding agents, with an iOS companion app.',
+        platform: 'macOS · Linux · iOS',
+        github: 'https://github.com/kccarlos/herdr-sheepdog',
+        install: [
+          { kind: 'copy', label: 'herdr plugin', command: 'herdr plugin install kccarlos/herdr-sheepdog' },
+          { kind: 'copy', label: 'brew install', command: 'brew install kccarlos/tap/sheepdog' },
+          { kind: 'link', label: 'iOS TestFlight', href: 'https://testflight.apple.com/join/bjCaFYgK' },
+        ],
+        stack: ['Go', 'Swift', 'JavaScript'],
+        description: 'Manage your herdr coding agents by voice, hands-free: hear who is stuck, approve with a word, ask what broke. A voice-first agent harness with an iPhone companion app.',
       },
       {
         name: 'gitcontext',
