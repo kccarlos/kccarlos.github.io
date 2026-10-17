@@ -214,3 +214,5 @@ ul.plain .meta { color: var(--dim); font: .75rem var(--mono); }
 footer .legal { display: flex; flex-direction: column; gap: .25rem; }
 footer .legal a { color: var(--muted); text-decoration: underline; text-underline-offset: 3px; text-decoration-color: var(--line); }
 footer .legal a:hover { color: var(--accent); }
+
+.project-list { margin-top: 1.6rem; }

@@ -4,18 +4,15 @@ import Base from '../layouts/Base.astro';
 import Icon from '../components/Icon.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import { SITE } from '../lib';
-import { projectGroups } from '../data/projects';
+import { projects } from '../data/projects';
 const about = await getEntry('about', 'about');
 const { Content } = await render(about!);
 ---
 <Base title="About">
   <div class="about"><Content /></div>
-  {projectGroups.map((g) => (
-    <section class="project-group">
-      <h2>{g.title}</h2>
-      {g.projects.map((p) => <ProjectCard project={p} />)}
-    </section>
-  ))}
+  <section class="project-list">
+    {projects.map((p) => <ProjectCard project={p} />)}
+  </section>
   <section class="about contact">
     <h3>How to find me on the 🌐</h3>
     <p>
