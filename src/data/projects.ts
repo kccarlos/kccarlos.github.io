@@ -66,7 +66,7 @@ export const projectGroups: { title: string; projects: Project[] }[] = [
     projects: [
       {
         name: 'herdr-sheepdog',
-        logo: '/projects/herdr-sheepdog.png',
+        logo: '/projects/herdr-sheepdog.png?v=2',
         platform: 'macOS · Linux · iOS',
         github: 'https://github.com/kccarlos/herdr-sheepdog',
         install: [
