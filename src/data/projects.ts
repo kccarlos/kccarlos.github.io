@@ -38,6 +38,7 @@ export const projects: Project[] = [
       { kind: 'link', label: 'Website', href: 'https://kccarlos.github.io/kvoice/' },
       { kind: 'copy', label: 'brew install', command: 'brew install --cask kccarlos/tap/kvoice' },
       { kind: 'link', label: 'Download DMG', href: 'https://github.com/kccarlos/kvoice/releases/latest' },
+      { kind: 'link', label: 'iOS TestFlight', href: 'https://testflight.apple.com/join/WzN5CnG6' },
     ],
     stack: ['Swift', 'SwiftUI', 'Core ML'],
     description:
