@@ -32,15 +32,16 @@ export const projects: Project[] = [
   {
     name: 'KVoice',
     logo: '/projects/kvoice.png',
-    platform: 'macOS 15+',
+    platform: 'macOS 15+ · iOS 26+',
     github: 'https://github.com/kccarlos/kvoice',
     install: [
+      { kind: 'link', label: 'Website', href: 'https://kccarlos.github.io/kvoice/' },
       { kind: 'copy', label: 'brew install', command: 'brew install --cask kccarlos/tap/kvoice' },
       { kind: 'link', label: 'Download DMG', href: 'https://github.com/kccarlos/kvoice/releases/latest' },
     ],
     stack: ['Swift', 'SwiftUI', 'Core ML'],
     description:
-      'Hold a hotkey, speak, and get finished text in any Mac app. Private on-device speech-to-text (Whisper, Parakeet, Apple Speech) with optional AI actions.',
+      'Hold a hotkey, speak, and get finished text in any Mac app; on iPhone, dictate from the keyboard or the Action Button. Private on-device speech-to-text with optional AI actions.',
   },
   {
     name: 'forumind',
